@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade de Juegos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Arcade de Juegos</h1>
+            <p>Selecciona tu juego favorito</p>
+        </header>
+
+        <div id="menu" class="menu">
+            <div class="game-card" onclick="loadGame('buscaminas')">
+                <div class="game-icon">💣</div>
+                <h2>Buscaminas</h2>
+                <p>Encuentra todas las minas</p>
+            </div>
+            <div class="game-card" onclick="loadGame('snake')">
+                <div class="game-icon">🐍</div>
+                <h2>Snake</h2>
+                <p>Come y crece sin chocar</p>
+            </div>
+            <div class="game-card" onclick="loadGame('tetris')">
+                <div class="game-icon">🟦</div>
+                <h2>Tetris</h2>
+                <p>Completa líneas con bloques</p>
+            </div>
+            <div class="game-card" onclick="loadGame('breakout')">
+                <div class="game-icon">🎯</div>
+                <h2>Arkanoid</h2>
+                <p>Rompe todos los ladrillos</p>
+            </div>
+            <div class="game-card" onclick="loadGame('ajedrez')">
+                <div class="game-icon">♔</div>
+                <h2>Ajedrez</h2>
+                <p>El juego de estrategia clásico</p>
+            </div>
+            <div class="game-card" onclick="loadGame('damas')">
+                <div class="game-icon">🔴</div>
+                <h2>Damas</h2>
+                <p>Captura todas las fichas</p>
+            </div>
+            <div class="game-card" onclick="loadGame('wordle-futbol')">
+                <div class="game-icon">⚽</div>
+                <h2>Wordle Fútbol</h2>
+                <p>Adivina el jugador</p>
+            </div>
+            <div class="game-card" onclick="loadGame('sudoku')">
+                <div class="game-icon">🔢</div>
+                <h2>Sudoku</h2>
+                <p>Completa el tablero</p>
+            </div>
+            <div class="game-card" onclick="loadGame('solitario')">
+                <div class="game-icon">🃏</div>
+                <h2>Solitario</h2>
+                <p>Ordena las cartas</p>
+            </div>
+            <div class="game-card" onclick="loadGame('memoria')">
+                <div class="game-icon">🎴</div>
+                <h2>Memoria</h2>
+                <p>Encuentra los pares</p>
+            </div>
+            <div class="game-card" onclick="loadGame('tictactoe')">
+                <div class="game-icon">⭕</div>
+                <h2>Tres en Raya</h2>
+                <p>Vence a la computadora</p>
+            </div>
+        </div>
+
+        <div id="game-container" class="game-container hidden">
+            <div class="game-header">
+                <button class="btn-back" onclick="backToMenu()">← Volver al Menú</button>
+                <h2 id="game-title"></h2>
+                <div class="difficulty-selector">
+                    <label>Dificultad:</label>
+                    <select id="difficulty" onchange="changeDifficulty()">
+                        <option value="facil">Fácil</option>
+                        <option value="medio" selected>Medio</option>
+                        <option value="dificil">Difícil</option>
+                    </select>
+                </div>
+            </div>
+            <div id="game-area"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/buscaminas.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/sudoku.js"></script>
+    <script src="js/solitario.js"></script>
+    <script src="js/tetris.js"></script>
+    <script src="js/breakout.js"></script>
+    <script src="js/memoria.js"></script>
+    <script src="js/tictactoe.js"></script>
+    <script src="js/ajedrez.js"></script>
+    <script src="js/damas.js"></script>
+    <script src="js/wordle-futbol.js"></script>
+</body>
+</html>
