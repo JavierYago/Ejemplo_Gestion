@@ -97,35 +97,148 @@ function renderCheckersBoard() {
             cell.dataset.row = row;
             cell.dataset.col = col;
             
-            // Color del tablero
+            // Color del tablero con efecto madera
             if ((row + col) % 2 === 0) {
                 cell.classList.add('light');
+                // Efecto de madera clara
+                cell.style.background = `
+                    linear-gradient(135deg, 
+                        #f0d9b5 0%, 
+                        #e8d1ad 25%,
+                        #f0d9b5 50%,
+                        #d4c4a8 75%,
+                        #f0d9b5 100%
+                    )
+                `;
             } else {
                 cell.classList.add('dark');
+                // Efecto de madera oscura
+                cell.style.background = `
+                    linear-gradient(135deg, 
+                        #b58863 0%, 
+                        #a67b5b 25%,
+                        #b58863 50%,
+                        #9a6f4f 75%,
+                        #a07855 100%
+                    )
+                `;
             }
             
-            // Ficha
+            // Ficha con efecto 3D realista
             const piece = checkersBoard[row][col];
             if (piece) {
                 const pieceEl = document.createElement('div');
                 pieceEl.className = `checkers-piece ${piece.color}`;
+                
+                // Crear efecto 3D con múltiples capas
+                if (piece.color === 'red') {
+                    pieceEl.style.background = `
+                        radial-gradient(circle at 35% 35%, 
+                            #ff9966 0%,
+                            #ff6b35 30%,
+                            #e85a2a 60%,
+                            #cc3300 90%,
+                            #991100 100%
+                        )
+                    `;
+                    pieceEl.style.boxShadow = `
+                        0 6px 12px rgba(0, 0, 0, 0.5),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+                        0 0 0 2px rgba(255, 107, 53, 0.3)
+                    `;
+                } else {
+                    pieceEl.style.background = `
+                        radial-gradient(circle at 35% 35%, 
+                            #666666 0%,
+                            #444444 30%,
+                            #2a2a2a 60%,
+                            #111111 90%,
+                            #000000 100%
+                        )
+                    `;
+                    pieceEl.style.boxShadow = `
+                        0 6px 12px rgba(0, 0, 0, 0.7),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                        inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+                        0 0 0 2px rgba(0, 0, 0, 0.5)
+                    `;
+                }
+                
+                // Bordes y detalles realistas
+                pieceEl.style.border = '3px solid rgba(0, 0, 0, 0.4)';
+                pieceEl.style.position = 'relative';
+                
+                // Anillo interior decorativo
+                const innerRing = document.createElement('div');
+                innerRing.style.cssText = `
+                    position: absolute;
+                    top: 8px;
+                    left: 8px;
+                    right: 8px;
+                    bottom: 8px;
+                    border: 2px solid rgba(255, 255, 255, 0.15);
+                    border-radius: 50%;
+                    pointer-events: none;
+                `;
+                pieceEl.appendChild(innerRing);
+                
                 if (piece.king) {
                     pieceEl.classList.add('king');
-                    pieceEl.innerHTML = '<span class="crown">👑</span>';
+                    const crown = document.createElement('span');
+                    crown.className = 'crown';
+                    crown.textContent = '♔';
+                    crown.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 1.8em;
+                        color: #ffd700;
+                        text-shadow: 
+                            0 0 10px rgba(255, 215, 0, 0.8),
+                            0 2px 4px rgba(0, 0, 0, 0.8);
+                        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+                    `;
+                    pieceEl.appendChild(crown);
                 }
+                
                 cell.appendChild(pieceEl);
             }
             
-            // Selección
+            // Selección con efecto brillante
             if (checkersSelected && checkersSelected.row === row && checkersSelected.col === col) {
                 cell.classList.add('selected');
+                cell.style.boxShadow = `
+                    inset 0 0 30px rgba(255, 215, 0, 0.6),
+                    0 0 20px rgba(255, 215, 0, 0.8)
+                `;
             }
             
-            // Movimientos válidos
+            // Movimientos válidos con indicador mejorado
             if (checkersSelected) {
                 const moves = getValidCheckersMoves(checkersSelected.row, checkersSelected.col);
                 if (moves.some(m => m.row === row && m.col === col)) {
                     cell.classList.add('valid-move');
+                    // Crear indicador de movimiento válido
+                    const indicator = document.createElement('div');
+                    indicator.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 24px;
+                        height: 24px;
+                        background: radial-gradient(circle, 
+                            rgba(0, 255, 136, 0.8) 0%, 
+                            rgba(0, 255, 136, 0.4) 50%,
+                            rgba(0, 255, 136, 0) 100%
+                        );
+                        border: 3px solid #00ff88;
+                        border-radius: 50%;
+                        animation: pulseDot 1.5s ease-in-out infinite;
+                    `;
+                    cell.appendChild(indicator);
                 }
             }
             

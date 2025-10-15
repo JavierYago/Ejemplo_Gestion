@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Vista Previa - GameVerse Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 210, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(255, 210, 0, 0.8)); }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+        
+        .preview-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .feature p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(79, 172, 254, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h2 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .highlight-box ul {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .highlight-box li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .highlight-box li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+        }
+        
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .badge-new {
+            background: linear-gradient(135deg, #00ff87 0%, #00d4ff 100%);
+            color: #0a0e27;
+        }
+        
+        .badge-premium {
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            color: #0a0e27;
+        }
+        
+        .badge-modern {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 GAMEVERSO PREMIUM</h1>
+        <p class="subtitle">Nueva Interfaz Ultra Moderna</p>
+        
+        <div class="badges">
+            <span class="badge badge-new">✨ NUEVO DISEÑO</span>
+            <span class="badge badge-premium">👑 PREMIUM</span>
+            <span class="badge badge-modern">🚀 MODERNO</span>
+        </div>
+        
+        <div class="preview-box">
+            <h2 style="margin-bottom: 20px; font-size: 2rem;">🌟 Características Principales</h2>
+            
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Glassmorphism UI</h3>
+                    <p>Efecto de cristal esmerilado con blur avanzado y transparencias sofisticadas</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <h3>Gradientes Vibrantes</h3>
+                    <p>Paleta de colores premium con degradados animados y resplandores neón</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🌊</div>
+                    <h3>Animaciones 3D</h3>
+                    <p>Efectos tridimensionales, partículas flotantes y transformaciones dinámicas</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">💫</div>
+                    <h3>Background Animado</h3>
+                    <p>Orbes de gradiente flotantes con rejilla animada y efectos de profundidad</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔆</div>
+                    <h3>Efectos de Luz</h3>
+                    <p>Glow effects, sombras dinámicas y resplandores con animaciones pulsantes</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Totalmente adaptable a desktop, tablet y móvil con transiciones suaves</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h2>🎯 Mejoras Implementadas</h2>
+            <ul>
+                <li>Sistema de diseño glassmorphism con backdrop-filter</li>
+                <li>Tipografía premium: Orbitron + Rajdhani</li>
+                <li>Sistema de partículas flotantes animadas</li>
+                <li>Tarjetas con efecto shimmer y transformación 3D</li>
+                <li>Badges de categoría para cada juego</li>
+                <li>Efectos hover ultra detallados</li>
+                <li>Paleta de gradientes vibrantes y modernos</li>
+                <li>Animaciones de entrada escalonadas</li>
+                <li>Controles mejorados con efectos visuales</li>
+                <li>Diseño responsive optimizado</li>
+            </ul>
+        </div>
+        
+        <div class="btn-container">
+            <a href="index.html" class="btn btn-primary">🚀 Ver Nueva Interfaz</a>
+            <a href="NUEVA_INTERFAZ.md" class="btn btn-secondary">📖 Documentación</a>
+        </div>
+        
+        <p style="margin-top: 40px; color: rgba(255, 255, 255, 0.5); font-size: 0.9rem;">
+            💡 Desarrollado con tecnologías web modernas: CSS3, Glassmorphism, Gradientes Animados
+        </p>
+    </div>
+</body>
+</html>

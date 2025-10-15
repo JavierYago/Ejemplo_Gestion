@@ -132,86 +132,144 @@ function drawSnake() {
         ctx.stroke();
     }
     
-    // Dibujar serpiente con efecto 3D
+    // Dibujar serpiente con bordes redondeados y efecto 3D mejorado
     snake.forEach((segment, index) => {
         const x = segment.x * snakeGridSize;
         const y = segment.y * snakeGridSize;
-        const size = snakeGridSize - 3;
+        const size = snakeGridSize - 4;
+        const radius = 6; // Radio para bordes redondeados
+        
+        ctx.save();
         
         if (index === 0) {
-            // Cabeza con gradiente brillante
-            const gradient = ctx.createRadialGradient(x + size/2, y + size/2, 0, x + size/2, y + size/2, size);
+            // Cabeza con gradiente brillante y bordes redondeados
+            const gradient = ctx.createRadialGradient(x + size/2 + 2, y + size/2 + 2, 0, x + size/2 + 2, y + size/2 + 2, size);
             gradient.addColorStop(0, '#00ff88');
-            gradient.addColorStop(0.5, '#00cc66');
+            gradient.addColorStop(0.4, '#00dd77');
+            gradient.addColorStop(0.7, '#00bb55');
             gradient.addColorStop(1, '#009944');
             ctx.fillStyle = gradient;
             
             ctx.shadowColor = '#00ff88';
-            ctx.shadowBlur = 15;
-            ctx.fillRect(x + 1.5, y + 1.5, size, size);
+            ctx.shadowBlur = 20;
             
-            // Ojos de la serpiente
+            // Dibujar rectángulo redondeado para la cabeza
+            ctx.beginPath();
+            ctx.roundRect(x + 2, y + 2, size, size, radius);
+            ctx.fill();
+            
+            // Brillo superior
             ctx.shadowBlur = 0;
+            const highlightGradient = ctx.createLinearGradient(x + 2, y + 2, x + 2, y + size/2);
+            highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+            highlightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = highlightGradient;
+            ctx.beginPath();
+            ctx.roundRect(x + 2, y + 2, size, size/2, [radius, radius, 0, 0]);
+            ctx.fill();
+            
+            // Ojos de la serpiente con brillo
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = '#fff';
             ctx.fillStyle = '#fff';
-            ctx.fillRect(x + 5, y + 5, 3, 3);
-            ctx.fillRect(x + size - 8, y + 5, 3, 3);
+            ctx.beginPath();
+            ctx.arc(x + 7, y + 7, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + size - 5, y + 7, 3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.shadowBlur = 0;
             ctx.fillStyle = '#000';
-            ctx.fillRect(x + 6, y + 6, 2, 2);
-            ctx.fillRect(x + size - 7, y + 6, 2, 2);
+            ctx.beginPath();
+            ctx.arc(x + 7.5, y + 7.5, 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + size - 4.5, y + 7.5, 2, 0, Math.PI * 2);
+            ctx.fill();
         } else {
-            // Cuerpo con gradiente verde
-            const bodyGradient = ctx.createLinearGradient(x, y, x + size, y + size);
-            const intensity = 1 - (index / snake.length) * 0.3;
-            bodyGradient.addColorStop(0, `rgba(0, 204, 102, ${intensity})`);
+            // Cuerpo con gradiente verde y bordes redondeados
+            const bodyGradient = ctx.createRadialGradient(x + size/2 + 2, y + size/2 + 2, 0, x + size/2 + 2, y + size/2 + 2, size);
+            const intensity = 1 - (index / snake.length) * 0.4;
+            bodyGradient.addColorStop(0, `rgba(0, 221, 119, ${intensity})`);
+            bodyGradient.addColorStop(0.5, `rgba(0, 187, 85, ${intensity})`);
             bodyGradient.addColorStop(1, `rgba(0, 153, 68, ${intensity})`);
             ctx.fillStyle = bodyGradient;
             
             ctx.shadowColor = '#00cc66';
-            ctx.shadowBlur = 8;
-            ctx.fillRect(x + 1.5, y + 1.5, size, size);
+            ctx.shadowBlur = 10;
             
-            // Escamas/textura
+            // Dibujar rectángulo redondeado para el cuerpo
+            ctx.beginPath();
+            ctx.roundRect(x + 2, y + 2, size, size, radius - 1);
+            ctx.fill();
+            
+            // Brillo superior en el cuerpo
             ctx.shadowBlur = 0;
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-            ctx.fillRect(x + size/2 - 1, y + 2, 2, size - 4);
+            const bodyHighlight = ctx.createLinearGradient(x + 2, y + 2, x + 2, y + size/2);
+            bodyHighlight.addColorStop(0, 'rgba(255, 255, 255, 0.25)');
+            bodyHighlight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = bodyHighlight;
+            ctx.beginPath();
+            ctx.roundRect(x + 2, y + 2, size, size/2, [radius - 1, radius - 1, 0, 0]);
+            ctx.fill();
+            
+            // Escamas/textura sutil
+            ctx.fillStyle = `rgba(255, 255, 255, ${0.08 * intensity})`;
+            ctx.beginPath();
+            ctx.roundRect(x + size/2, y + 4, 2, size - 4, 1);
+            ctx.fill();
         }
+        
+        ctx.restore();
     });
     
-    // Dibujar comida con efecto pulsante
+    // Dibujar comida con efecto pulsante y bordes redondeados
     const fx = food.x * snakeGridSize;
     const fy = food.y * snakeGridSize;
-    const fsize = snakeGridSize - 3;
+    const fsize = snakeGridSize - 4;
     
     const time = Date.now() / 200;
     const pulse = Math.sin(time) * 0.3 + 1;
     
+    ctx.save();
+    
     // Aura de la comida
-    const foodAura = ctx.createRadialGradient(fx + fsize/2, fy + fsize/2, 0, fx + fsize/2, fy + fsize/2, fsize * pulse);
+    const foodAura = ctx.createRadialGradient(fx + fsize/2 + 2, fy + fsize/2 + 2, 0, fx + fsize/2 + 2, fy + fsize/2 + 2, fsize * pulse);
     foodAura.addColorStop(0, 'rgba(255, 107, 53, 0.8)');
     foodAura.addColorStop(0.5, 'rgba(255, 107, 53, 0.4)');
     foodAura.addColorStop(1, 'rgba(255, 107, 53, 0)');
     ctx.fillStyle = foodAura;
-    ctx.fillRect(fx - 3, fy - 3, fsize + 6, fsize + 6);
+    ctx.fillRect(fx - 3, fy - 3, fsize + 10, fsize + 10);
     
-    // Comida principal
-    const foodGradient = ctx.createRadialGradient(fx + fsize/2, fy + fsize/2, 0, fx + fsize/2, fy + fsize/2, fsize);
-    foodGradient.addColorStop(0, '#ff6b35');
-    foodGradient.addColorStop(0.6, '#f7931e');
+    // Comida principal circular con gradiente
+    const foodGradient = ctx.createRadialGradient(fx + fsize/2 + 2, fy + fsize/2 + 2, 0, fx + fsize/2 + 2, fy + fsize/2 + 2, fsize/2);
+    foodGradient.addColorStop(0, '#ff8866');
+    foodGradient.addColorStop(0.4, '#ff6b35');
+    foodGradient.addColorStop(0.8, '#f7931e');
     foodGradient.addColorStop(1, '#cc5500');
     ctx.fillStyle = foodGradient;
     
     ctx.shadowColor = '#ff6b35';
-    ctx.shadowBlur = 20;
+    ctx.shadowBlur = 25;
     ctx.beginPath();
-    ctx.arc(fx + fsize/2, fy + fsize/2, fsize/2, 0, Math.PI * 2);
+    ctx.arc(fx + fsize/2 + 2, fy + fsize/2 + 2, fsize/2, 0, Math.PI * 2);
     ctx.fill();
     
-    // Brillo en la comida
+    // Brillo en la comida (más grande y realista)
     ctx.shadowBlur = 0;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
     ctx.beginPath();
-    ctx.arc(fx + fsize/2 - 2, fy + fsize/2 - 2, fsize/5, 0, Math.PI * 2);
+    ctx.arc(fx + fsize/2 - 1, fy + fsize/2 - 1, fsize/4, 0, Math.PI * 2);
     ctx.fill();
+    
+    // Pequeño reflejo adicional
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.beginPath();
+    ctx.arc(fx + fsize/2 + 3, fy + fsize/2 + 3, fsize/6, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.restore();
     
     ctx.shadowBlur = 0;
 }

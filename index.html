@@ -3,89 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade de Juegos</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>GameVerse - Arcade Premium</title>
+    <link rel="stylesheet" href="css/styles-new.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    
     <div class="container">
         <header>
-            <h1>🎮 Arcade de Juegos</h1>
-            <p>Selecciona tu juego favorito</p>
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <h1 class="main-title">
+                    <span class="title-game">GAME</span><span class="title-verse">VERSE</span>
+                </h1>
+                <div class="subtitle-container">
+                    <div class="subtitle-line"></div>
+                    <p class="subtitle">ARCADE PREMIUM EXPERIENCE</p>
+                    <div class="subtitle-line"></div>
+                </div>
+            </div>
         </header>
 
         <div id="menu" class="menu">
-            <div class="game-card" onclick="loadGame('buscaminas')">
-                <div class="game-icon">💣</div>
-                <h2>Buscaminas</h2>
-                <p>Encuentra todas las minas</p>
+            <div class="game-card" onclick="loadGame('buscaminas')" data-category="puzzle">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">💣</div>
+                    <div class="game-badge">PUZZLE</div>
+                    <h2>Buscaminas</h2>
+                    <p>Encuentra todas las minas</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('snake')">
-                <div class="game-icon">🐍</div>
-                <h2>Snake</h2>
-                <p>Come y crece sin chocar</p>
+            <div class="game-card" onclick="loadGame('snake')" data-category="arcade">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🐍</div>
+                    <div class="game-badge">ARCADE</div>
+                    <h2>Snake</h2>
+                    <p>Come y crece sin chocar</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('tetris')">
-                <div class="game-icon">🟦</div>
-                <h2>Tetris</h2>
-                <p>Completa líneas con bloques</p>
+            <div class="game-card" onclick="loadGame('tetris')" data-category="arcade">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🟦</div>
+                    <div class="game-badge">ARCADE</div>
+                    <h2>Tetris</h2>
+                    <p>Completa líneas con bloques</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('breakout')">
-                <div class="game-icon">🎯</div>
-                <h2>Arkanoid</h2>
-                <p>Rompe todos los ladrillos</p>
+            <div class="game-card" onclick="loadGame('breakout')" data-category="arcade">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-badge">ARCADE</div>
+                    <h2>Arkanoid</h2>
+                    <p>Rompe todos los ladrillos</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('ajedrez')">
-                <div class="game-icon">♔</div>
-                <h2>Ajedrez</h2>
-                <p>El juego de estrategia clásico</p>
+            <div class="game-card" onclick="loadGame('ajedrez')" data-category="strategy">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">♔</div>
+                    <div class="game-badge">STRATEGY</div>
+                    <h2>Ajedrez</h2>
+                    <p>El juego de estrategia clásico</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('damas')">
-                <div class="game-icon">🔴</div>
-                <h2>Damas</h2>
-                <p>Captura todas las fichas</p>
+            <div class="game-card" onclick="loadGame('damas')" data-category="strategy">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🔴</div>
+                    <div class="game-badge">STRATEGY</div>
+                    <h2>Damas</h2>
+                    <p>Captura todas las fichas</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('wordle-futbol')">
-                <div class="game-icon">⚽</div>
-                <h2>Wordle Fútbol</h2>
-                <p>Adivina el jugador</p>
+            <div class="game-card" onclick="loadGame('wordle-futbol')" data-category="trivia">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">⚽</div>
+                    <div class="game-badge">TRIVIA</div>
+                    <h2>Wordle Fútbol</h2>
+                    <p>Adivina el jugador</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('sudoku')">
-                <div class="game-icon">🔢</div>
-                <h2>Sudoku</h2>
-                <p>Completa el tablero</p>
+            <div class="game-card" onclick="loadGame('sudoku')" data-category="puzzle">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🔢</div>
+                    <div class="game-badge">PUZZLE</div>
+                    <h2>Sudoku</h2>
+                    <p>Completa el tablero</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('solitario')">
-                <div class="game-icon">🃏</div>
-                <h2>Solitario</h2>
-                <p>Ordena las cartas</p>
+            <div class="game-card" onclick="loadGame('solitario')" data-category="cards">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🃏</div>
+                    <div class="game-badge">CARDS</div>
+                    <h2>Solitario</h2>
+                    <p>Ordena las cartas</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('memoria')">
-                <div class="game-icon">🎴</div>
-                <h2>Memoria</h2>
-                <p>Encuentra los pares</p>
+            <div class="game-card" onclick="loadGame('memoria')" data-category="puzzle">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">🎴</div>
+                    <div class="game-badge">PUZZLE</div>
+                    <h2>Memoria</h2>
+                    <p>Encuentra los pares</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
-            <div class="game-card" onclick="loadGame('tictactoe')">
-                <div class="game-icon">⭕</div>
-                <h2>Tres en Raya</h2>
-                <p>Vence a la computadora</p>
+            <div class="game-card" onclick="loadGame('tictactoe')" data-category="strategy">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="game-icon">⭕</div>
+                    <div class="game-badge">STRATEGY</div>
+                    <h2>Tres en Raya</h2>
+                    <p>Vence a la computadora</p>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
         </div>
 
         <div id="game-container" class="game-container hidden">
             <div class="game-header">
-                <button class="btn-back" onclick="backToMenu()">← Volver al Menú</button>
-                <h2 id="game-title"></h2>
+                <button class="btn-back" onclick="backToMenu()">
+                    <span class="btn-icon">←</span>
+                    <span class="btn-text">Volver al Menú</span>
+                </button>
+                <h2 id="game-title" class="game-active-title"></h2>
                 <div class="difficulty-selector">
                     <label>Dificultad:</label>
                     <select id="difficulty" onchange="changeDifficulty()">
-                        <option value="facil">Fácil</option>
-                        <option value="medio" selected>Medio</option>
-                        <option value="dificil">Difícil</option>
+                        <option value="facil">🟢 Fácil</option>
+                        <option value="medio" selected>🟡 Medio</option>
+                        <option value="dificil">🔴 Difícil</option>
                     </select>
                 </div>
             </div>
             <div id="game-area"></div>
         </div>
+    </div>
+    
+    <!-- Floating particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <script src="js/main.js"></script>

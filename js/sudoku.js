@@ -125,8 +125,39 @@ function renderSudokuBoard() {
             
             const isFixed = sudokuSolution[row][col] !== 0 && sudokuBoard[row][col] !== 0;
             
+            // Aplicar estilos según posición para mejor separación visual
+            let cellStyle = '';
+            
+            // Bordes más gruesos cada 3 celdas
+            if (col % 3 === 2 && col !== 8) {
+                cellStyle += 'border-right: 3px solid rgba(255, 215, 0, 0.5) !important; ';
+            }
+            if (row % 3 === 2 && row !== 8) {
+                cellStyle += 'border-bottom: 3px solid rgba(255, 215, 0, 0.5) !important; ';
+            }
+            
+            // Fondo alternado para los bloques 3x3
+            const blockRow = Math.floor(row / 3);
+            const blockCol = Math.floor(col / 3);
+            if ((blockRow + blockCol) % 2 === 0) {
+                cell.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+            } else {
+                cell.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+            }
+            
+            cell.style.cssText += cellStyle;
+            
             if (isFixed) {
                 cell.classList.add('fixed');
+                cell.style.background = `
+                    linear-gradient(135deg, 
+                        rgba(245, 87, 108, 0.3) 0%, 
+                        rgba(240, 147, 251, 0.3) 100%
+                    )
+                `;
+                cell.style.fontWeight = '900';
+                cell.style.color = '#fff';
+                cell.style.textShadow = '0 2px 8px rgba(0, 0, 0, 0.5)';
             }
             
             if (sudokuBoard[row][col] !== 0) {
@@ -135,6 +166,30 @@ function renderSudokuBoard() {
             
             if (!isFixed) {
                 cell.addEventListener('click', () => selectSudokuCell(row, col));
+                cell.style.cursor = 'pointer';
+                
+                // Efecto hover para celdas editables
+                cell.addEventListener('mouseenter', () => {
+                    if (!cell.classList.contains('selected')) {
+                        cell.style.background = 'rgba(79, 172, 254, 0.15)';
+                        cell.style.transform = 'scale(1.05)';
+                        cell.style.zIndex = '10';
+                    }
+                });
+                
+                cell.addEventListener('mouseleave', () => {
+                    if (!cell.classList.contains('selected')) {
+                        const blockRow = Math.floor(row / 3);
+                        const blockCol = Math.floor(col / 3);
+                        if ((blockRow + blockCol) % 2 === 0) {
+                            cell.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+                        } else {
+                            cell.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+                        }
+                        cell.style.transform = 'scale(1)';
+                        cell.style.zIndex = '1';
+                    }
+                });
             }
             
             board.appendChild(cell);
