@@ -199,6 +199,11 @@ function clearLines() {
         document.getElementById('tetris-score').textContent = tetrisScore;
         document.getElementById('tetris-level').textContent = tetrisLevel;
         document.getElementById('tetris-lines').textContent = tetrisLines;
+        
+        // Verificar victoria - llegar al nivel 15 o 100 líneas
+        if (tetrisLevel >= 15 || tetrisLines >= 100) {
+            winTetrisGame();
+        }
     }
 }
 
@@ -346,4 +351,10 @@ function endTetrisGame() {
     tetrisGameOver = true;
     clearInterval(window.tetrisInterval);
     setTimeout(() => alert(`¡Juego terminado!\nPuntuación: ${tetrisScore}\nNivel: ${tetrisLevel}`), 100);
+}
+
+function winTetrisGame() {
+    tetrisGameOver = true;
+    clearInterval(window.tetrisInterval);
+    setTimeout(() => alert(`¡VICTORIA! 🎉\n¡Alcanzaste el nivel ${tetrisLevel}!\nPuntuación final: ${tetrisScore}\nLíneas completadas: ${tetrisLines}`), 100);
 }

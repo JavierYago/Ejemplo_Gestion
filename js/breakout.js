@@ -284,6 +284,12 @@ function nextLevel() {
     breakoutLevel++;
     document.getElementById('breakout-level').textContent = breakoutLevel;
     
+    // Verificar victoria - completar nivel 10
+    if (breakoutLevel > 10) {
+        winBreakoutGame();
+        return;
+    }
+    
     // Incrementar velocidad
     const speedIncrease = 1.1;
     breakoutBall.dx *= speedIncrease;
@@ -309,4 +315,10 @@ function endBreakoutGame() {
     breakoutGameOver = true;
     clearInterval(window.breakoutInterval);
     setTimeout(() => alert(`¡Juego terminado!\nPuntuación: ${breakoutScore}\nNivel alcanzado: ${breakoutLevel}`), 100);
+}
+
+function winBreakoutGame() {
+    breakoutGameOver = true;
+    clearInterval(window.breakoutInterval);
+    setTimeout(() => alert(`¡VICTORIA TOTAL! 🏆\n¡Completaste los 10 niveles!\nPuntuación final: ${breakoutScore}`), 100);
 }

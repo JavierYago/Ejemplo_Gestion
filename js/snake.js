@@ -102,6 +102,13 @@ function updateSnake() {
         snakeScore += 10;
         document.getElementById('snake-score').textContent = snakeScore;
         placeFood();
+        
+        // Verificar victoria - si la serpiente llena todo el tablero
+        const maxCells = maxPos * maxPos;
+        if (snake.length === maxCells) {
+            winSnakeGame();
+            return;
+        }
     } else {
         snake.pop();
     }
@@ -279,6 +286,13 @@ function endSnakeGame() {
     clearInterval(window.snakeInterval);
     document.getElementById('snake-status').textContent = '💀';
     setTimeout(() => alert(`¡Juego terminado! Puntuación: ${snakeScore}`), 100);
+}
+
+function winSnakeGame() {
+    snakeGameOver = true;
+    clearInterval(window.snakeInterval);
+    document.getElementById('snake-status').textContent = '🏆';
+    setTimeout(() => alert(`¡VICTORIA PERFECTA! 🎉\n¡Llenaste todo el tablero!\nPuntuación: ${snakeScore}`), 100);
 }
 
 function restartSnake() {
